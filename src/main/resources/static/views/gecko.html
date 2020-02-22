@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <script src="/js/lib/jquery-3.4.1.min.js"></script>
+    <script src="/js/lib/angular.min.js"></script>
+    <script src="/js/lib/bootstrap.min.js"></script>
+    <script src="/js/lib/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    <script src="/js/app/gecko/geckoApp.js"></script>
+
+    <script>
+
+
+
+
+    </script>
+
+    <title>Gecko</title>
+</head>
+<body ng-app="geckoModule" ng-controller="geckoController">
+
+    <div class="container">
+
+        <h1>Gecko</h1>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">
+            Add
+        </button>
+
+        <table class="table table-striped table-hover">
+
+            <thead class="thead-dark">
+                <th>Fase</th>
+                <th>Fase_padre</th>
+                <th>Fase_madre</th>
+                <th>Precio</th>
+                <th>id. proyecto</th>
+            <th></th>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="gecko in geckos">
+                    <td>{{gecko.fase}}</td>
+                    <td>{{gecko.fase_madre}}</td>
+                    <td>{{gecko.fase_padre}}</td>
+                    <td>{{gecko.precio}}</td>
+                    <td>{{gecko.id_proyecto}}</td>
+                    <td>
+                        <!-- Botón Editar -->
+                        <button type="button" class="btn btn-warning" ng-click="selectEdit(gecko)" data-toggle="modal" data-target="#editModal">
+                            Edit
+                        </button>
+
+                        <!-- Botón Remover -->
+                        <button type="button" class="btn btn-danger" ng-click="selectEdit(gecko)" data-toggle="modal" data-target="#deleteModal">
+                            Delete
+                        </button>
+                    </td>
+
+                </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label class="col-form-label">Fase</label>
+                            <input type="text" class="form-control" ng-model="gecko.fase">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label">Fase de la Madre</label>
+                            <input type="text" class="form-control" ng-model="gecko.fase_madre">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label">Fase de el padre</label>
+                            <input type="text" class="form-control" ng-model="gecko.fase_padre">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label">Id de proyecto</label>
+                            <input type="text" class="form-control" ng-model="gecko.id_proyecto">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label">Precio</label>
+                            <input type="text" class="form-control" ng-model="gecko.precio">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-primary" ng-click="add(gecko)" data-dismiss="modal">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label class="col-form-label">Fase</label>
+                            <input type="text" class="form-control" ng-model="gecko.fase">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label">Fase de madre</label>
+                            <input type="text" class="form-control" ng-model="gecko.fase_madre">
+                        </div>
+                        <div class="form-group">
+                        <label class="col-form-label">Fase del padre</label>
+                        <input type="text" class="form-control" ng-model="gecko.fase_padre">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label">id. proyecto</label>
+                            <input type="text" class="form-control" ng-model="gecko.id_proyecto">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label">precio</label>
+                            <input type="text" class="form-control" ng-model="gecko.precio">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-primary" ng-click="edit(gecko)" data-dismiss="modal">Edit</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{gecko.fase}}
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-primary" ng-click="delete(gecko)" data-dismiss="modal">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
